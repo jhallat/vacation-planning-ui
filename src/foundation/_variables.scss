@@ -1,0 +1,66 @@
+/* =======================================================
+=                       Colors                          =
+====================================================== */
+
+/* Brand Colors */
+$color-olive: #BABF8F;
+$color-olive-light: #D1D79D;
+$color-peach: #FFDED4;
+$color-peach-extra-dark: #BA897A;
+$color-plum: #8C5D73;
+$color-chocolate: #261914;
+$color-coffee: #735645;
+
+/* Neutral Colors */
+$color-neutral-1: #FFFDFA;
+$color-neutral-2: #D7D2CC;
+$color-neutral-3: #ABA8A4;
+$color-neutral-4: #676665;
+$color-neutral-5: #1F1E1E;
+
+/* Utility Colors */
+$color-red: #F14141;
+
+/* Font sizes */
+$fs-xs: 0.75rem; // 12px
+$fs-sm: 0.85rem; // 14px;
+$fs-base: 1rem; // 16px;
+$fs-lg: 1.125rem; // 18px;
+$fs-xl: 1.5rem; // 24px;
+$fs-xxl: 2rem; // 32px;
+$fs-xxxl: 3rem; // 48px
+
+$ff-base: Montserrat, sans-serif;
+
+$space-small: 0.6rem;
+$space-medium: 1.2rem;
+
+@mixin notify {
+  animation-name: notify-animation;
+  animation-duration: 0.33s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 3;
+}
+
+
+@keyframes notify-animation {
+  0% {
+    transform: translateX(0px);
+  }
+
+  25% {
+    transform: translateX(3px);
+  }
+
+  50% {
+    transform: translateX(0px);
+  }
+
+  75% {
+    transform: translateX(-3px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
