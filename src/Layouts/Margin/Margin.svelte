@@ -3,17 +3,17 @@
 </script>
 
 <style lang="scss">
-   @import "../../../foundation/variables";
+   @import "../../style/abstracts/variables";
 
-    .content-sm {
+    .margin--sm {
         margin: $space-small;
     }
 
-    .content-md {
+    .margin--md {
       margin: $space-medium;
     }
 </style>
 
-<div class:content-sm={size==='sm'} class:content-md={size==='md'}>
+<div class:margin--sm={size==='sm'} class:margin--md={size==='md'}>
    <slot />
 </div>

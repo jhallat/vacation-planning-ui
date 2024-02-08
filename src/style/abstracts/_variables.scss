@@ -1,3 +1,23 @@
+/*
+TODO - organize
+abstracts
+   _variables.scss
+   _mixins.scss
+   _functions.scss
+base
+   _animations.scss
+   _base.scss
+   _typography.scss
+   _utilities.scss
+layout
+pages
+components
+main.scss
+
+ */
+
+
+
 /* =======================================================
 =                       Colors                          =
 ====================================================== */
@@ -8,8 +28,12 @@ $color-olive-light: #D1D79D;
 $color-peach: #FFDED4;
 $color-peach-extra-dark: #BA897A;
 $color-plum: #8C5D73;
+$color-plum-light: lighten($color-plum, 15%);
+$color-plum-dark: darken($color-plum, 15%);
 $color-chocolate: #261914;
 $color-coffee: #735645;
+$color-coffee-light: lighten($color-coffee, 15%);
+$color-coffee-dark: darken($color-coffee, 15%);
 
 /* Neutral Colors */
 $color-neutral-1: #FFFDFA;
@@ -20,20 +44,37 @@ $color-neutral-5: #1F1E1E;
 
 /* Utility Colors */
 $color-red: #F14141;
+$color-shadow: rgba(0,0,25, 0.45);
 
 /* Font sizes */
-$fs-xs: 0.75rem; // 12px
-$fs-sm: 0.85rem; // 14px;
-$fs-base: 1rem; // 16px;
-$fs-lg: 1.125rem; // 18px;
-$fs-xl: 1.5rem; // 24px;
-$fs-xxl: 2rem; // 32px;
-$fs-xxxl: 3rem; // 48px
+$fs-xs: 1.2rem; // 12px
+$fs-sm: 1.4rem; // 14px;
+$fs-base: 1.6rem; // 16px;
+$fs-lg: 1.8rem; // 18px;
+$fs-xl: 2.4rem; // 24px;
+$fs-xxl: 3.2rem; // 32px;
+$fs-xxxl: 4.8rem; // 48px
 
 $ff-base: Montserrat, sans-serif;
 
+/* Spaces */
+$space-xsmall: 0.3rem;
 $space-small: 0.6rem;
 $space-medium: 1.2rem;
+
+/* Grid Layout */
+$grid-width: 114rem;
+$grid-gap-vertical: $space-medium;
+
+$shadow: 0.2rem 0.2rem 0.4rem $color-shadow;
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
 
 @mixin notify {
   animation-name: notify-animation;
@@ -41,7 +82,6 @@ $space-medium: 1.2rem;
   animation-timing-function: ease-in-out;
   animation-iteration-count: 3;
 }
-
 
 @keyframes notify-animation {
   0% {

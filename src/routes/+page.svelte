@@ -1,9 +1,9 @@
 <script>
-  import PageHeading from "../components/Layouts/PageTemplate/PageHeading/PageHeading.svelte";
-  import PageSubHeading from "../components/Layouts/PageTemplate/PageSubHeading/PageSubHeading.svelte";
-  import LogonDialog from "../components/LogonDialog.svelte";
+  import PageHeading from "../Layouts/PageTemplate/PageHeading/PageHeading.svelte";
+  import PageSubHeading from "../Layouts/PageTemplate/PageSubHeading/PageSubHeading.svelte";
+  import LogonDialog from "../pages/Logon/LogonDialog.svelte";
   import {goto} from "$app/navigation";
-  import PageTemplate from "../components/Layouts/PageTemplate/PageTemplate.svelte";
+  import PageTemplate from "../Layouts/PageTemplate/PageTemplate.svelte";
 
 
   //$: uppercaseName = name.toUpperCase();
@@ -84,22 +84,4 @@
     </div>
 </div>
 </PageTemplate>
-<!-- <h1 class="heading" class:heading-good={name==='John'}>Welcome {uppercaseName} {message}</h1> -->
-<!--<input type="text" value={name} on:input={nameInput}/> -->
-<!--<input type="text" bind:value={name} />
-<button on:click|preventDefault={changeName}>Change Name</button>
-<PackingCard heading="What {name} Needs to Bring"></PackingCard> -->
-<!-- <p>{@html descpription}</p> Will render as html -->
-<!-- {#if name==="John"}
-    <p>Yeah John!!!</p> -->
-<!-- can also use :else if -->
-<!-- {:else}
-    <p>Where's John?</p>
-{/if} -->
-<!-- Looping
-{#each someList as someItem, index (someItem.id)}
-    <div>{someItem}</div>
-{:else}
-    <div>No items in list</div>
-{/each}
--->
+

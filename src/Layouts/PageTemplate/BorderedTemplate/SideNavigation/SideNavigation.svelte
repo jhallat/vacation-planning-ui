@@ -1,9 +1,9 @@
 <script>
-  import Button from "../../../../Button/Button.svelte";
+  import Button from "../../../../components/Button/Button.svelte";
 </script>
 
 <style lang="scss">
-    @import '../../../../../foundation/variables';
+    @import '../../../../style/abstracts/variables';
 
     .content {
         display: flex;

@@ -1,8 +1,8 @@
 <script>
-  import PageTemplate from "../../components/Layouts/PageTemplate/PageTemplate.svelte";
+  import PageTemplate from "../../Layouts/PageTemplate/PageTemplate.svelte";
   import StepCard from "../../components/StepCard/StepCard.svelte";
-  import Dialog from "../../components/Layouts/Dialog/Dialog.svelte";
-  import Row from "../../components/Layouts/Row/Row.svelte";
+  import Dialog from "../../Layouts/Dialog/Dialog.svelte";
+  import Row from "../../Layouts/Row/Row.svelte";
   import {goto} from "$app/navigation";
 
   const handleStepOne = () => {
@@ -10,8 +10,10 @@
   }
 </script>
 
-<style>
-    .content {
+<style lang="scss">
+    @import "../../style/abstracts/variables";
+
+    .page {
         background-image: url("../../images/vacation-planning.jpeg");
         background-size: cover;
         top: 0px;
@@ -19,9 +21,11 @@
         left: 0px;
         right: 0px;
         position: absolute;
+        font-size: $fs-base;
+        color: $color-chocolate;
     }
 
-    .dialog {
+    .page__dialog {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -58,8 +62,8 @@
 </style>
 
 <PageTemplate name="Let's Get Started !!!">
-    <div class="content">
-    <div class="dialog">
+    <div class="page">
+    <div class="page__dialog">
     <Dialog>
         <Row>
         <StepCard caption = "Step 1. Things to Pack"

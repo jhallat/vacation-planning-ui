@@ -3,9 +3,9 @@
 </script>
 
 <style lang="scss">
-  @import "../../foundation/_variables.scss";
+  @import "../../style/abstracts/variables";
 
-    .content {
+    .text {
         font-family: Montserrat, sans-serif;
         font-size: $fs-base;
         color: $color-chocolate;
@@ -16,6 +16,6 @@
     }
 </style>
 
-<div class="content" class:error={error}>
+<div class="text" class:error={error}>
     <slot></slot>
 </div>

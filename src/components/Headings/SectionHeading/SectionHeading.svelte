@@ -3,7 +3,7 @@
 </script>
 
 <style lang="scss">
-    @import '../../../foundation/_variables.scss';
+    @import '../../../style/abstracts/variables';
 
     .heading {
         font-family: Agbalumo;
@@ -13,11 +13,11 @@
         padding: 0;
     }
 
-    .underline {
+    .heading__underline {
       border-bottom: 1px solid $color-plum;
     }
 </style>
 
-<div class="underline">
+<div class="heading__underline">
 <h3 class="heading">{caption}</h3>
 </div>

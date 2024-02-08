@@ -2,12 +2,17 @@
     export let caption;
 </script>
 
-<style>
+<style lang="scss">
+  @import '../../../style/abstracts/variables';
     h2 {
         font-family: Agbalumo;
-        color: #8C5D73;
+        color: transparent;
         padding: 0rem;
         margin: 0;
+        font-size: $fs-xxl;
+        background-image: linear-gradient(to right, $color-plum, $color-plum-light);
+        background-clip: text;
+        display: inline-block;
     }
 
     div {
