@@ -7,6 +7,8 @@
   import ThingToPackModal from "./AddItemToPackModal/ThingToPackModal.svelte";
   import Amount from "./Amount/Amount.svelte";
   import Frequency from "./Frequency/Frequency.svelte";
+  import {getThingsToPack, createThingToPack, updateThingToPack} from "../../services/ThingsToPackService.js";
+  import {getConditions, createCondition} from "../../services/ConditionService.js";
 
   let thingsToPack = [];
   let conditions = [];
@@ -26,37 +28,20 @@
 
   onMount(() => {
     isLoading = true;
-    fetch("http://localhost:3000/api/v1/things-to-pack")
-      .then(res => {
-        if (!res.ok) {
-          throw new Error("GET things-to-pack failed.")
-        }
-        return res.json();
-      })
-      .then(({data}) => {
-        thingsToPack = data.thingsToPack;
-        console.log(thingsToPack);
-        isLoading = false;
-      })
-      .catch(err => {
+    getThingsToPack().then((thingsToPackData) => {
+      console.log(thingsToPackData);
+      thingsToPack = thingsToPackData;
+      getConditions().then((conditionsData) => {
+        conditions = conditionsData;
+      }).catch((err) => {
         isLoading = false;
         console.log(err);
-      })
-    fetch("http://localhost:3000/api/v1/conditions")
-      .then(res => {
-        if (!res.ok) {
-          throw new Error("GET conditions failed.")
-        }
-        return res.json();
-      })
-      .then(({data}) => {
-        conditions = data.conditions;
-        isLoading = false;
-      })
-      .catch(err => {
-        isLoading = false;
-        console.log(err);
-      })
+      });
+      isLoading = false;
+    }).catch((err) => {
+      isLoading = false;
+      console.log(err);
+    });
   });
 
   const handleNewItem = () => {
@@ -74,69 +59,31 @@
     displayDialog = true;
   }
 
-  const handleConditionCreated = (event) => {
-    fetch('http://localhost:3000/api/v1/conditions', {
-      method: 'POST',
-      body: JSON.stringify({description : event.detail}),
-      headers: {
-        'Content-Type' : 'application/json'
-      }
-    }).then(res => {
-      if (!res.ok) {
-        throw new Error('Failed to put conditions')
-      }
-      return res.json();
-    })
-      .then(({data}) => {
-        console.log(data);
-        conditions = [...conditions, data.condition]
-      })
-      .catch(err => {
-        console.log(err);
-      })
+  const handleConditionCreated = ({detail}) => {
+    createCondition({description : detail}).then((newCondtion) => {
+      conditions = [...conditions, newCondtion];
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
-  const handleAddNewItem = (event) => {
+  const handleAddNewItem = ({detail}) => {
     if (isNewItem) {
-      fetch("http://localhost:3000/api/v1/things-to-pack", {
-        method: 'POST',
-        body: JSON.stringify(event.detail),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(res => {
-        if (!res.ok) {
-          throw new Error('Failed to put things-to-pack')
-        }
-        return res.json();
-      })
-        .then(({data}) => {
-          thingsToPack = [...thingsToPack, data.thingsToPack];
-        })
-        .catch(err => {
-            console.log(err);
-          }
-        );
+      createThingToPack(detail).then(newThingToPack => {
+        thingsToPack = [...thingsToPack, newThingToPack];
+        console.log(thingsToPack);
+      }).catch(err => {
+        console.log(err);
+      });
     } else {
-      fetch(`http://localhost:3000/api/v1/things-to-pack/${event.detail.id}`, {
-        method: 'PUT',
-        body: JSON.stringify(event.detail),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(res => {
-        if (!res.ok) {
-          throw new Error('Failed to put things-to-pack')
-        }
-        const  updated = [...thingsToPack];
-        const index = updated.findIndex(item => item.id === event.detail.id);
-        updated[index] = event.detail;
+      updateThingToPack(detail.id, detail).then(updatedThingToPack => {
+        const updated = [...thingsToPack];
+        const index = updated.findIndex(item => item.id === detail.id);
+        updated[index] = updatedThingToPack;
         thingsToPack = updated;
-      })
-        .catch(err => {
-            console.log(err);
-          }
-        );
+      }).catch(err => {
+        console.log(err);
+      });
     }
 
     displayDialog = false;
@@ -160,6 +107,16 @@
     font-family: $ff-base;
     font-size: $fs-base;
     border-collapse: collapse;
+  }
+
+  thead {
+    display: block;
+  }
+  tbody {
+    display: block;
+    overflow-y: scroll;
+    height: 70vh;
+    width: 50vw;
   }
 
   th {
@@ -207,12 +164,14 @@
             <p>...Loading</p>
         {:else}
         <table>
+            <thead>
             <tr>
                 <th></th>
                 <th>What to Bring</th>
                 <th>How Many to Bring</th>
                 <th>When to Bring</th>
             </tr>
+            </thead>
             <tbody>
             {#each thingsToPack as thingToPack (thingToPack.id)}
                 <tr>
